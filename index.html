@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Catch My Heart</title><style>
+body{margin:0;font-family:Arial;background:linear-gradient(135deg,#180024,#3a0a5d,#000);color:#fff;overflow:hidden}
+#wrap{display:flex;justify-content:center;align-items:center;height:100vh;padding:20px}
+.card{background:rgba(255,255,255,.1);backdrop-filter:blur(8px);padding:24px;border-radius:18px;max-width:420px;width:90%;text-align:center}
+button{padding:12px 22px;border:0;border-radius:30px;background:#ff4d88;color:#fff;font-size:17px;cursor:pointer}
+input{width:90%;padding:10px;border-radius:10px;border:0;margin:12px}
+.heart{position:absolute;font-size:32px;cursor:pointer}
+.pop{position:absolute;animation:p 1s forwards}@keyframes p{to{transform:translateY(-40px);opacity:0}}
+</style></head><body><div id='wrap'></div><script>
+const w=document.getElementById('wrap');
+function welcome(){w.innerHTML=`<div class=card><h1>❤️ Catch My Heart ❤️</h1><p>Hello Siya ❤️<br>Complete two questions, then catch my heart.</p><button onclick='q1()'>Start</button></div>`}
+function q1(){w.innerHTML=`<div class=card><h2>Question 1</h2><p>Where did Ambuj meet you for the first time?</p><input id=a placeholder='Answer'><br><button onclick='c1()'>Next</button><div id=m></div></div>`}
+function c1(){if(a.value.trim().toLowerCase()=='school')q2();else m.innerHTML='❤️ Hint: School'}
+function q2(){w.innerHTML=`<div class=card><h2>Question 2</h2><p>Do You Love Me? ❤️</p><button onclick='game()'>Yes, Always ❤️</button></div>`}
+let sc=0,t=20,iv;
+function game(){w.innerHTML="<div class=card><div id=s>❤️ 0/10</div><div id=tm>⏳20</div><p>Catch 10 hearts!</p></div>";spawn();spawn();spawn();iv=setInterval(()=>{t--;tm.textContent='⏳'+t;if(t<=0){clearInterval(iv);lose()}},1000)}
+function spawn(){let h=document.createElement('div');h.className='heart';h.textContent='❤️';h.style.left=Math.random()*(innerWidth-40)+'px';h.style.top=Math.random()*(innerHeight-40)+'px';h.onclick=()=>{sc++;s.textContent='❤️ '+sc+'/10';h.remove();if(sc>=10){win();return}spawn()};document.body.appendChild(h)}
+function clearH(){document.querySelectorAll('.heart').forEach(e=>e.remove())}
+function win(){clearInterval(iv);clearH();w.innerHTML=`<div class=card><h1>🎉 Congratulations Siya ❤️</h1><p>You didn't just catch these hearts...<br>You captured Ambuj's heart forever.<br><br>Our story started in <b>School</b> ❤️<br>Happy Girlfriend's Day ❤️<br><br><b>Forever Yours,<br>Ambuj ❤️</b></p><button onclick='rain()'>❤️ Keep My Heart Forever ❤️</button></div>`}
+function lose(){clearH();w.innerHTML="<div class=card><h2>Almost There ❤️</h2><button onclick='location.reload()'>Retry</button></div>"}
+function rain(){for(let i=0;i<50;i++){let e=document.createElement('div');e.textContent='❤️';e.style.position='fixed';e.style.left=Math.random()*100+'vw';e.style.top='-20px';e.style.transition='4s linear';document.body.appendChild(e);setTimeout(()=>{e.style.transform='translateY(110vh)'},10)}alert('Mission Complete ❤️')}
+welcome();
+</script></body></html>
