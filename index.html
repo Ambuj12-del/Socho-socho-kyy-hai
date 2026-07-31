@@ -6,8 +6,16 @@ button{padding:12px 20px;border:0;border-radius:25px;background:#ff4d88;color:#f
 const a=document.getElementById('a');const S=x=>a.innerHTML=x;
 S(`<div class=card><h1>❤️ Catch My Heart ❤️</h1><button onclick=q1()>Start</button></div>`);
 function q1(){S(`<div class=card><p>Where did Ambuj meet you for the first time?</p><input id=i><br><button onclick="i.value.toLowerCase()=='school'?q2():alert('Hint: School')">Next</button></div>`)}
-function q2(){S(`<div class=card><p>Do You Love Me? ❤️</p><button onclick=q3()>Yes, Always ❤️</button></div>`)}
-function q3(){S(`<div class=card><p>What is Ambuj's favourite snack?</p><input id=s><br><button onclick="s.value.toLowerCase()=='samosa'?game():alert('Wrong ❤️')">Start Game</button></div>`)}
+function q2(){S(`<div class=card><p>Do You Love Me? ❤️</p>
+<button onclick=q3()>Yes, Always ❤️</button><br><br>
+<button onclick="noLove()" style="background:#666">No 💔</button></div>`)}
+function noLove(){S(`<div class=card><h2>🥺 Oyee...</h2><p>Jao... Baat nahi karunga main! 😤❤️</p><button onclick=q2()>⬅️ Back</button></div>`)}
+function q3(){S(`<div class=card><p>What is Ambuj's favourite snack?</p>
+<button onclick="game()">🥟 Samosa</button><br><br>
+<button onclick="wrongSnack()">🍕 Pizza</button><br><br>
+<button onclick="wrongSnack()">🍔 Burger</button><br><br>
+<button onclick="wrongSnack()">🍜 Maggi</button></div>`)}
+function wrongSnack(){S(`<div class=card><h2>😂 Oyee...</h2><p>Jao... Baat nahi karunga main! 😤❤️</p><button onclick=q3()>⬅️ Back</button></div>`)}
 let sc=0,t=20,id;
 function add(){let h=document.createElement('div');h.className='heart';h.textContent='❤️';h.style.left=Math.random()*(innerWidth-40)+'px';h.style.top=Math.random()*(innerHeight-40)+'px';h.onclick=()=>{sc++;h.remove();if(sc>=10){clearInterval(id);win()}else add();st.textContent=sc+'/10 | '+t+'s'};document.body.appendChild(h)}
 function game(){S("<div class=card><h3>Catch 10 Hearts</h3><div id=st>0/10 | 20s</div></div>");for(let i=0;i<5;i++)add();id=setInterval(()=>{t--;st.textContent=sc+'/10 | '+t+'s';if(t<=0){clearInterval(id);lose()}},1000)}
